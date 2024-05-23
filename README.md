@@ -6,7 +6,7 @@
   </h2>
 </p>
 <p align="center">
-  <a href="https://www.npmjs.com/package/@kibibit/ha-nintendo-switch-card"><img src="https://img.shields.io/npm/v/@kibibit/ha-nintendo-switch-card/latest.svg?style=for-the-badge&logo=npm&color=CB3837"></a>
+  <a href="https://www.npmjs.com/package/@gewoonjaap/ha-nintendo-switch-card"><img src="https://img.shields.io/npm/v/@kibibit/ha-nintendo-switch-card/latest.svg?style=for-the-badge&logo=npm&color=CB3837"></a>
 </p>
 <p align="center">
   <a href="https://github.com/custom-components/hacs"><img src="https://img.shields.io/badge/HACS-Default-orange.svg"></a>
@@ -137,11 +137,8 @@ type: 'custom:ha-nintendo-switch-card'
 
 ## Stay in touch
 
-- Author - [Neil Kalman](https://github.com/thatkookooguy)
-- Website - [https://github.com/kibibit](https://github.com/kibibit)
-- StackOverflow - [thatkookooguy](https://stackoverflow.com/users/1788884/thatkookooguy)
-- Twitter - [@thatkookooguy](https://twitter.com/thatkookooguy)
-- Twitter - [@kibibit_opensrc](https://twitter.com/kibibit_opensrc)
+- Author - [Jaap](https://github.com/GewoonJaap)
+- Website - [https://mrproper.dev](https://mrproper.dev)
 
 ## Support
 
