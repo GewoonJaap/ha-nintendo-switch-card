@@ -129,6 +129,7 @@ class HaNintendoSwitchCard extends LitElement {
   }
 
   createEntityCard(entity: NintendoSwitchUserType): TemplateResult {
+    console.log(entity);
     return html`
       <div class="kb-container kb-clickable" @click=${() => this.handlePopup(entity)}>
         <div class="kb-steam-username">${this.config.friendly_name ? this.config.friendly_name : entity.name}</div>
