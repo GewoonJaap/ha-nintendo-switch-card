@@ -105,18 +105,18 @@ class HaNintendoSwitchCard extends LitElement {
         return entity
           ? html`
               <div
-                class="kb-steam-multi kb-clickable ${index === entities.length - 1
+                class="ha-nintendo-switch-multi kb-clickable ${index === entities.length - 1
                   ? 'kb-last'
                   : ''} ${entity.attributes.presence.state.toLowerCase()}"
                 @click=${() => this.handlePopup(entity)}
               >
-                <div class="kb-steam-user">
-                  <img src="${entity.attributes.imageUri}" class="kb-steam-avatar" />
-                  <div class="kb-steam-username">${entity.attributes.name}</div>
+                <div class="ha-nintendo-switch-user">
+                  <img src="${entity.attributes.imageUri}" class="ha-nintendo-switch-avatar" />
+                  <div class="ha-nintendo-switch-username">${entity.attributes.name}</div>
                 </div>
-                <div class="kb-steam-value">${entity.attributes.presence.game?.name || '-'}</div>
+                <div class="ha-nintendo-switch-value">${entity.attributes.presence.game?.name || '-'}</div>
                 ${entity.attributes.presence.game && this.config.game_background
-                  ? html` <img src="${entity.attributes.presence.game.imageUri}" class="kb-steam-game-bg" /> `
+                  ? html` <img src="${entity.attributes.presence.game.imageUri}" class="ha-nintendo-switch-game-bg" /> `
                   : ''}
               </div>
             `
@@ -136,18 +136,18 @@ class HaNintendoSwitchCard extends LitElement {
     console.log(entity);
     return html`
       <div class="kb-container kb-clickable" @click=${() => this.handlePopup(entity)}>
-        <div class="kb-steam-username">
+        <div class="ha-nintendo-switch-username">
           ${this.config.friendly_name ? this.config.friendly_name : entity.attributes.name}
         </div>
         ${this.renderUserAvatar(entity)}
-        <div class="kb-steam-online-status">${entity.attributes.presence.state}</div>
-        <div class="kb-steam-level">
-          <span class="kb-steam-level-text-container">
-            <span class="kb-steam-level-text">${entity.attributes.presence.logoutAt}</span>
+        <div class="ha-nintendo-switch-online-status">${entity.attributes.presence.state}</div>
+        <div class="ha-nintendo-switch-level">
+          <span class="ha-nintendo-switch-level-text-container">
+            <span class="ha-nintendo-switch-level-text">${entity.attributes.presence.logoutAt}</span>
           </span>
           <ha-icon icon="mdi:shield"></ha-icon>
         </div>
-        <div class="kb-steam-last-online">
+        <div class="ha-nintendo-switch-last-online">
           <span>
             <ha-icon icon="mdi:clock-outline"></ha-icon>
             ${entity.attributes.presence.state.toLowerCase() === 'online' ? 'Online Since' : 'Last Online'}
@@ -165,16 +165,16 @@ class HaNintendoSwitchCard extends LitElement {
 
   renderUserAvatar(entity: HAEntityType): TemplateResult {
     return entity.attributes.imageUri
-      ? html` <img src="${entity.attributes.imageUri}" class="kb-steam-avatar" /> `
-      : html` <ha-icon icon="${entity.attributes.imageUri}" class="kb-steam-avatar"></ha-icon> `;
+      ? html` <img src="${entity.attributes.imageUri}" class="ha-nintendo-switch-avatar" /> `
+      : html` <ha-icon icon="${entity.attributes.imageUri}" class="ha-nintendo-switch-avatar"></ha-icon> `;
   }
 
   renderCurrentlyPlayingGame(entity: HAEntityType): TemplateResult {
     const currentlyPlayingGame = entity.attributes.presence.game;
 
-    return currentlyPlayingGame
+    return currentlyPlayingGame?.name
       ? html`
-          <div class="kb-steam-now-playing">
+          <div class="ha-nintendo-switch-now-playing">
             <div class="label">Now Playing</div>
             <div class="game-title">${currentlyPlayingGame.name}</div>
             <img class="game-img" src="${currentlyPlayingGame.imageUri}" />
@@ -198,16 +198,16 @@ class HaNintendoSwitchCard extends LitElement {
         cursor: pointer;
       }
 
-      .kb-steam-value {
+      .ha-nintendo-switch-value {
         padding: 0 0.3em;
       }
 
-      .kb-steam-value,
-      .kb-steam-user {
+      .ha-nintendo-switch-value,
+      .ha-nintendo-switch-user {
         z-index: 2;
       }
 
-      .kb-steam-game-bg {
+      .ha-nintendo-switch-game-bg {
         z-index: 0;
         position: absolute;
         right: 0;
@@ -237,26 +237,26 @@ class HaNintendoSwitchCard extends LitElement {
         width: 100%;
       }
 
-      .kb-steam-avatar {
+      .ha-nintendo-switch-avatar {
         border-radius: 50%;
         width: 40px;
         height: 40px;
         margin: 8px;
       }
 
-      ha-icon.kb-steam-avatar {
+      ha-icon.ha-nintendo-switch-avatar {
         display: flex;
         align-items: center;
         justify-content: center;
         background: rgba(0, 0, 0, 0.8);
       }
 
-      .kb-steam-level {
+      .ha-nintendo-switch-level {
         position: relative;
         margin: 16px;
       }
 
-      .kb-steam-level > .kb-steam-level-text-container {
+      .ha-nintendo-switch-level > .ha-nintendo-switch-level-text-container {
         position: absolute;
         top: 0;
         bottom: 0;
@@ -272,30 +272,30 @@ class HaNintendoSwitchCard extends LitElement {
         transform: translateY(1px);
       }
 
-      .kb-steam-last-online {
+      .ha-nintendo-switch-last-online {
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: space-between;
       }
 
-      .kb-steam-now-playing {
+      .ha-nintendo-switch-now-playing {
         width: 100%;
         overflow: hidden;
         margin-top: 2em;
       }
 
-      .kb-steam-now-playing > .game-title {
+      .ha-nintendo-switch-now-playing > .game-title {
         font-size: 1.7em;
         margin: 0.2em 0 1.5em;
       }
 
-      .kb-steam-now-playing > .game-img {
+      .ha-nintendo-switch-now-playing > .game-img {
         width: 100%;
         height: auto;
       }
 
-      .kb-steam-multi {
+      .ha-nintendo-switch-multi {
         width: 100%;
         display: flex;
         align-items: center;
@@ -305,16 +305,16 @@ class HaNintendoSwitchCard extends LitElement {
         overflow: hidden;
       }
 
-      .kb-steam-multi .kb-steam-user {
+      .ha-nintendo-switch-multi .ha-nintendo-switch-user {
         display: flex;
         align-items: center;
       }
 
-      .kb-steam-multi .kb-steam-avatar {
+      .ha-nintendo-switch-multi .ha-nintendo-switch-avatar {
         margin: 0 16px 0 0;
       }
 
-      .kb-steam-multi::before {
+      .ha-nintendo-switch-multi::before {
         z-index: 1;
         position: absolute;
         bottom: 0;
@@ -328,8 +328,8 @@ class HaNintendoSwitchCard extends LitElement {
         z-index: 3;
       }
 
-      .kb-steam-multi.online::before,
-      .kb-steam-multi.snooze::before {
+      .ha-nintendo-switch-multi.online::before,
+      .ha-nintendo-switch-multi.snooze::before {
         box-shadow: 0 0 1em #1c1c17, 0 0 1em #ff4242;
         background: #ff4f4f;
       }
