@@ -176,7 +176,7 @@ const Y=window.ShadowRoot&&(void 0===window.ShadyCSS||window.ShadyCSS.nativeShad
                 <div class="ha-nintendo-switch-value">${(null===(n=i.attributes.presence.game)||void 0===n?void 0:n.name)||"-"}</div>
                 ${i.attributes.presence.game&&this.config.game_background?j` <img src="${i.attributes.presence.game.imageUri}" class="ha-nintendo-switch-game-bg" /> `:""}
               </div>
-            `:j` <div class="not-found">Entity ${e} not found.</div> `}))]}handlePopup(t){const e=t.entity_id,s=new Event("hass-more-info",{composed:!0});s.detail={entityId:e},this.dispatchEvent(s)}createEntityCard(t){return console.log(t),j`
+            `:j` <div class="not-found">Entity ${e} not found.</div> `}))]}handlePopup(t){const e=t.entity_id,s=new Event("hass-more-info",{composed:!0});s.detail={entityId:e},this.dispatchEvent(s)}createEntityCard(t){return j`
       <div class="kb-container kb-clickable" @click=${()=>this.handlePopup(t)}>
         <div class="ha-nintendo-switch-username">
           ${this.config.friendly_name?this.config.friendly_name:t.attributes.name}

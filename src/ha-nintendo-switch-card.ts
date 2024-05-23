@@ -133,7 +133,6 @@ class HaNintendoSwitchCard extends LitElement {
   }
 
   createEntityCard(entity: HAEntityType): TemplateResult {
-    console.log(entity);
     return html`
       <div class="kb-container kb-clickable" @click=${() => this.handlePopup(entity)}>
         <div class="ha-nintendo-switch-username">
