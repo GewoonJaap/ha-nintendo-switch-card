@@ -1,7 +1,7 @@
 {
-  "name": "@kibibit/kb-steam-card",
+  "name": "@gewoonjaap/ha-nintendo-switch-card",
   "version": "0.0.0-development",
-  "description": "Lovelace Steam Card",
+  "description": "Lovelace Nintendo Card",
   "keywords": [
     "home-assistant",
     "homeassistant",
@@ -11,14 +11,14 @@
     "custom-cards",
     "hassio"
   ],
-  "module": "dist/kb-steam-card.js",
+  "module": "dist/ha-nintendo-switch-card.js",
   "files": [
     "/dist",
     "info.md",
     "/themes",
     "hacs.json"
   ],
-  "author": "thatkookooguy <neilkalman@gmail.com>",
+  "author": "GewoonJaap <info@mrproper.dev>",
   "license": "MIT",
   "dependencies": {
     "custom-card-helpers": "^1.6.6",
@@ -87,20 +87,14 @@
       "path": "./node_modules/cz-conventional-changelog"
     }
   },
-  "husky": {
-    "hooks": {
-      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  },
   "publishConfig": {
     "access": "public"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Kibibit/kb-steam-card.git"
+    "url": "https://github.com/GewoonJaap/ha-nintendo-switch-card.git"
   },
   "bugs": {
-    "url": "https://github.com/Kibibit/kb-steam-card/issues"
+    "url": "https://github.com/GewoonJaap/ha-nintendo-switch-card/issues"
   }
 }

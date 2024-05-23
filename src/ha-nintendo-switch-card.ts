@@ -13,22 +13,23 @@ declare global {
 }
 
 console.info(
-  `%c  KB-STEAM-CARD \n%c  ${packageDetails.version}   `,
+  `%c  ha-nintendo-switch-card \n%c  ${packageDetails.version}   `,
   'color: orange; font-weight: bold; background: black',
   'color: white; font-weight: bold; background: dimgray',
 );
 
 window.customCards = window.customCards || [];
 window.customCards.push({
-  type: 'kb-steam-card',
-  name: 'kb Steam Card',
-  description: 'A card to show Steam integrations',
+  type: 'ha-nintendo-switch-card',
+  name: 'HA Nintendo Switch Card',
+  description: 'A card to show Nintendo Switch integrations',
 });
 
 import { format } from 'timeago.js';
+import { NintendoSwitchUserType } from './types';
 
-@customElement('kb-steam-card')
-class KbSteamCard extends LitElement {
+@customElement('ha-nintendo-switch-card')
+class HaNintendoSwitchCard extends LitElement {
   hass;
   config;
   static get properties(): PropertyDeclarations {
@@ -84,8 +85,8 @@ class KbSteamCard extends LitElement {
       const newEntities = [] as string[];
 
       entities.forEach((entity: string) => {
-        const entityObj = this.hass.states[entity];
-        if (entityObj && entityObj.state && entityObj.state !== 'offline') {
+        const entityObj = this.hass.states[entity] as NintendoSwitchUserType;
+        if (entityObj && entityObj.presence.state && entityObj.presence.state.toLowerCase() !== 'offline') {
           newEntities.push(entity);
         }
       });
@@ -94,22 +95,24 @@ class KbSteamCard extends LitElement {
     }
 
     return [
-      html` <div class="card-header"><div class="name">Steam Friends</div></div> `,
+      html` <div class="card-header"><div class="name">Nintendo Friends</div></div> `,
       ...entities.map((ent, index) => {
-        const entity = this.hass.states[ent];
+        const entity = this.hass.states[ent] as NintendoSwitchUserType;
         return entity
           ? html`
               <div
-                class="kb-steam-multi kb-clickable ${index === entities.length - 1 ? 'kb-last' : ''} ${entity.state}"
+                class="kb-steam-multi kb-clickable ${index === entities.length - 1
+                  ? 'kb-last'
+                  : ''} ${entity.presence.state.toLowerCase()}"
                 @click=${() => this.handlePopup(entity)}
               >
                 <div class="kb-steam-user">
-                  <img src="${entity.attributes.entity_picture}" class="kb-steam-avatar" />
-                  <div class="kb-steam-username">${entity.attributes.friendly_name}</div>
+                  <img src="${entity.imageUri}" class="kb-steam-avatar" />
+                  <div class="kb-steam-username">${entity.name}</div>
                 </div>
-                <div class="kb-steam-value">${entity.attributes.game || '-'}</div>
-                ${entity.attributes.game && this.config.game_background
-                  ? html` <img src="${entity.attributes.game_image_header}" class="kb-steam-game-bg" /> `
+                <div class="kb-steam-value">${entity.presence.game?.name || '-'}</div>
+                ${entity.presence.game && this.config.game_background
+                  ? html` <img src="${entity.presence.game.imageUri}" class="kb-steam-game-bg" /> `
                   : ''}
               </div>
             `
@@ -125,51 +128,49 @@ class KbSteamCard extends LitElement {
     this.dispatchEvent(e);
   }
 
-  createEntityCard(entity): TemplateResult {
+  createEntityCard(entity: NintendoSwitchUserType): TemplateResult {
     return html`
       <div class="kb-container kb-clickable" @click=${() => this.handlePopup(entity)}>
-        <div class="kb-steam-username">
-          ${this.config.friendly_name ? this.config.friendly_name : entity.attributes.friendly_name}
-        </div>
+        <div class="kb-steam-username">${this.config.friendly_name ? this.config.friendly_name : entity.name}</div>
         ${this.renderUserAvatar(entity)}
-        <div class="kb-steam-online-status">${entity.state}</div>
+        <div class="kb-steam-online-status">${entity.presence.state}</div>
         <div class="kb-steam-level">
           <span class="kb-steam-level-text-container">
-            <span class="kb-steam-level-text">${entity.attributes.level}</span>
+            <span class="kb-steam-level-text">${entity.presence.logoutAt}</span>
           </span>
           <ha-icon icon="mdi:shield"></ha-icon>
         </div>
         <div class="kb-steam-last-online">
           <span>
             <ha-icon icon="mdi:clock-outline"></ha-icon>
-            ${entity.state === 'online' ? 'Online Since' : 'Last Online'}
+            ${entity.presence.state.toLowerCase() === 'online' ? 'Online Since' : 'Last Online'}
           </span>
-          <span> ${this.formatLastOnline(entity.attributes.last_online)} </span>
+          <span> ${this.formatLastOnline(entity.presence.logoutAt)} </span>
         </div>
         ${this.renderCurrentlyPlayingGame(entity)}
       </div>
     `;
   }
 
-  formatLastOnline(lastOnline): string {
+  formatLastOnline(lastOnline: number): string {
     return format(new Date(lastOnline));
   }
 
-  renderUserAvatar(entity): TemplateResult {
-    return entity.attributes.entity_picture
-      ? html` <img src="${entity.attributes.entity_picture}" class="kb-steam-avatar" /> `
-      : html` <ha-icon icon="${entity.attributes.icon}" class="kb-steam-avatar"></ha-icon> `;
+  renderUserAvatar(entity: NintendoSwitchUserType): TemplateResult {
+    return entity.imageUri
+      ? html` <img src="${entity.imageUri}" class="kb-steam-avatar" /> `
+      : html` <ha-icon icon="${entity.imageUri}" class="kb-steam-avatar"></ha-icon> `;
   }
 
-  renderCurrentlyPlayingGame(entity): TemplateResult {
-    const currentlyPlayingGame = entity.attributes.game;
+  renderCurrentlyPlayingGame(entity: NintendoSwitchUserType): TemplateResult {
+    const currentlyPlayingGame = entity.presence.game;
 
     return currentlyPlayingGame
       ? html`
           <div class="kb-steam-now-playing">
             <div class="label">Now Playing</div>
-            <div class="game-title">${entity.attributes.game}</div>
-            <img class="game-img" src="${entity.attributes.game_image_header}" />
+            <div class="game-title">${currentlyPlayingGame.name}</div>
+            <img class="game-img" src="${currentlyPlayingGame.imageUri}" />
           </div>
         `
       : html``;

@@ -1,12 +1,12 @@
 <p align="center">
-  <a href="https://github.com/Kibibit/kb-steam-card/" target="blank"><img src="https://thatkookooguy.github.io/https-assets/screenshots/kb-steam-card-logo.png" width="500" alt="achievibit Logo" />
+  <a href="https://github.com/Kibibit/ha-nintendo-switch-card/" target="blank"><img src="https://thatkookooguy.github.io/https-assets/screenshots/ha-nintendo-switch-card-logo.png" width="500" alt="achievibit Logo" />
   </a>
   <h2 align="center">
     @kibibit/hass-kibibit-theme
   </h2>
 </p>
 <p align="center">
-  <a href="https://www.npmjs.com/package/@kibibit/kb-steam-card"><img src="https://img.shields.io/npm/v/@kibibit/kb-steam-card/latest.svg?style=for-the-badge&logo=npm&color=CB3837"></a>
+  <a href="https://www.npmjs.com/package/@kibibit/ha-nintendo-switch-card"><img src="https://img.shields.io/npm/v/@kibibit/ha-nintendo-switch-card/latest.svg?style=for-the-badge&logo=npm&color=CB3837"></a>
 </p>
 <p align="center">
   <a href="https://github.com/custom-components/hacs"><img src="https://img.shields.io/badge/HACS-Default-orange.svg"></a>
@@ -23,15 +23,15 @@
 
 ### away \ offline state
 
-![away \ offline state](https://thatkookooguy.github.io/https-assets/screenshots/kb-steam-card-offline.jpeg)
+![away \ offline state](https://thatkookooguy.github.io/https-assets/screenshots/ha-nintendo-switch-card-offline.jpeg)
 
 ### online state
 
-![online state](https://thatkookooguy.github.io/https-assets/screenshots/kb-steam-card-online.jpeg)
+![online state](https://thatkookooguy.github.io/https-assets/screenshots/ha-nintendo-switch-card-online.jpeg)
 
 ### while playing a game
 
-![now playing](https://thatkookooguy.github.io/https-assets/screenshots/kb-steam-card-now-playing.jpeg)
+![now playing](https://thatkookooguy.github.io/https-assets/screenshots/ha-nintendo-switch-card-now-playing.jpeg)
 
 ## Installation
 
@@ -58,7 +58,7 @@ for a single user card, use `entity`:
 
 ```yaml
 entity: sensor.steam_<steam-id>
-type: 'custom:kb-steam-card'
+type: 'custom:ha-nintendo-switch-card'
 ```
 
 you can change the username using the following:
@@ -66,7 +66,7 @@ you can change the username using the following:
 ```yaml
 entity: sensor.steam_<steam-id>
 friendly_name: Myself
-type: 'custom:kb-steam-card'
+type: 'custom:ha-nintendo-switch-card'
 ```
 
 for multiple users, use the `entities` attribute:
@@ -77,20 +77,20 @@ entities:
   - sensor.steam_<steam-id>
   - sensor.steam_<steam-id>
   - sensor.steam_<steam-id>
-type: 'custom:kb-steam-card'
+type: 'custom:ha-nintendo-switch-card'
 ```
 
 you can also use a prefix selector to select all steam sensors:
 
 ```yaml
-type: 'custom:kb-steam-card'
+type: 'custom:ha-nintendo-switch-card'
 entities: sensor.steam_
 ```
 
 to show only **online users**, add the `online_only` attribute:
 
 ```yaml
-type: 'custom:kb-steam-card'
+type: 'custom:ha-nintendo-switch-card'
 entities: sensor.steam_
 online_only: true
 ```
@@ -105,7 +105,7 @@ entities:
   - sensor.steam_<steam-id>
 friendly_name: hello
 game_background: true
-type: 'custom:kb-steam-card'
+type: 'custom:ha-nintendo-switch-card'
 ```
 
 ## Stay in touch

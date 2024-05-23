@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://github.com/Kibibit/kb-steam-card/" target="blank"><img src="screenshots/logo.png" width="500" alt="achievibit Logo" />
+  <a href="https://github.com/Kibibit/ha-nintendo-switch-card/" target="blank"><img src="screenshots/logo.png" width="500" alt="achievibit Logo" />
   </a>
   <h2 align="center">
     @kibibit/hass-kibibit-theme
@@ -56,7 +56,7 @@ for a single user card, use `entity`:
 
 ```yaml
 entity: sensor.steam_<steam-id>
-type: 'custom:kb-steam-card'
+type: 'custom:ha-nintendo-switch-card'
 ```
 
 you can change the username using the following:
@@ -64,7 +64,7 @@ you can change the username using the following:
 ```yaml
 entity: sensor.steam_<steam-id>
 friendly_name: Myself
-type: 'custom:kb-steam-card'
+type: 'custom:ha-nintendo-switch-card'
 ```
 
 for multiple users, use the `entities` attribute:
@@ -75,7 +75,7 @@ entities:
   - sensor.steam_<steam-id>
   - sensor.steam_<steam-id>
   - sensor.steam_<steam-id>
-type: 'custom:kb-steam-card'
+type: 'custom:ha-nintendo-switch-card'
 ```
 
 you can also show the game header image as background with `game_background: true`:
@@ -88,7 +88,7 @@ entities:
   - sensor.steam_<steam-id>
 friendly_name: hello
 game_background: true
-type: 'custom:kb-steam-card'
+type: 'custom:ha-nintendo-switch-card'
 ```
 
 ## Stay in touch
