@@ -180,7 +180,7 @@ const Y=window.ShadowRoot&&(void 0===window.ShadyCSS||window.ShadyCSS.nativeShad
       <div class="kb-container kb-clickable" @click=${()=>this.handlePopup(t)}>
         <div class="ha-nintendo-switch-username">
           ${this.config.friendly_name?this.config.friendly_name:t.attributes.name}
-          (SW-${t.attributes.links.friendCode})
+          (SW-${t.attributes.links.friendCode.id})
         </div>
         ${this.renderUserAvatar(t)}
         <div class="ha-nintendo-switch-online-status">${t.attributes.presence.state}</div>
