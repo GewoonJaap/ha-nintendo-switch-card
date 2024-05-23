@@ -13,6 +13,10 @@ export interface BoilerplateCardConfig extends LovelaceCardConfig {
   double_tap_action?: ActionConfig;
 }
 
+export interface HAEntityType {
+  attributes: NintendoSwitchUserType;
+}
+
 export interface NintendoSwitchUserType {
   id: number;
   nsaId: string;

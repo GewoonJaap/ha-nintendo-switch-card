@@ -26,7 +26,7 @@ window.customCards.push({
 });
 
 import { format } from 'timeago.js';
-import { NintendoSwitchUserType } from './types';
+import { HAEntityType } from './types';
 
 @customElement('ha-nintendo-switch-card')
 class HaNintendoSwitchCard extends LitElement {
@@ -85,8 +85,12 @@ class HaNintendoSwitchCard extends LitElement {
       const newEntities = [] as string[];
 
       entities.forEach((entity: string) => {
-        const entityObj = this.hass.states[entity] as NintendoSwitchUserType;
-        if (entityObj && entityObj.presence.state && entityObj.presence.state.toLowerCase() !== 'offline') {
+        const entityObj = this.hass.states[entity] as HAEntityType;
+        if (
+          entityObj &&
+          entityObj.attributes.presence.state &&
+          entityObj.attributes.presence.state.toLowerCase() !== 'offline'
+        ) {
           newEntities.push(entity);
         }
       });
@@ -97,22 +101,22 @@ class HaNintendoSwitchCard extends LitElement {
     return [
       html` <div class="card-header"><div class="name">Nintendo Friends</div></div> `,
       ...entities.map((ent, index) => {
-        const entity = this.hass.states[ent] as NintendoSwitchUserType;
+        const entity = this.hass.states[ent] as HAEntityType;
         return entity
           ? html`
               <div
                 class="kb-steam-multi kb-clickable ${index === entities.length - 1
                   ? 'kb-last'
-                  : ''} ${entity.presence.state.toLowerCase()}"
+                  : ''} ${entity.attributes.presence.state.toLowerCase()}"
                 @click=${() => this.handlePopup(entity)}
               >
                 <div class="kb-steam-user">
-                  <img src="${entity.imageUri}" class="kb-steam-avatar" />
-                  <div class="kb-steam-username">${entity.name}</div>
+                  <img src="${entity.attributes.imageUri}" class="kb-steam-avatar" />
+                  <div class="kb-steam-username">${entity.attributes.name}</div>
                 </div>
-                <div class="kb-steam-value">${entity.presence.game?.name || '-'}</div>
-                ${entity.presence.game && this.config.game_background
-                  ? html` <img src="${entity.presence.game.imageUri}" class="kb-steam-game-bg" /> `
+                <div class="kb-steam-value">${entity.attributes.presence.game?.name || '-'}</div>
+                ${entity.attributes.presence.game && this.config.game_background
+                  ? html` <img src="${entity.attributes.presence.game.imageUri}" class="kb-steam-game-bg" /> `
                   : ''}
               </div>
             `
@@ -128,25 +132,27 @@ class HaNintendoSwitchCard extends LitElement {
     this.dispatchEvent(e);
   }
 
-  createEntityCard(entity: NintendoSwitchUserType): TemplateResult {
+  createEntityCard(entity: HAEntityType): TemplateResult {
     console.log(entity);
     return html`
       <div class="kb-container kb-clickable" @click=${() => this.handlePopup(entity)}>
-        <div class="kb-steam-username">${this.config.friendly_name ? this.config.friendly_name : entity.name}</div>
+        <div class="kb-steam-username">
+          ${this.config.friendly_name ? this.config.friendly_name : entity.attributes.name}
+        </div>
         ${this.renderUserAvatar(entity)}
-        <div class="kb-steam-online-status">${entity.presence.state}</div>
+        <div class="kb-steam-online-status">${entity.attributes.presence.state}</div>
         <div class="kb-steam-level">
           <span class="kb-steam-level-text-container">
-            <span class="kb-steam-level-text">${entity.presence.logoutAt}</span>
+            <span class="kb-steam-level-text">${entity.attributes.presence.logoutAt}</span>
           </span>
           <ha-icon icon="mdi:shield"></ha-icon>
         </div>
         <div class="kb-steam-last-online">
           <span>
             <ha-icon icon="mdi:clock-outline"></ha-icon>
-            ${entity.presence.state.toLowerCase() === 'online' ? 'Online Since' : 'Last Online'}
+            ${entity.attributes.presence.state.toLowerCase() === 'online' ? 'Online Since' : 'Last Online'}
           </span>
-          <span> ${this.formatLastOnline(entity.presence.logoutAt)} </span>
+          <span> ${this.formatLastOnline(entity.attributes.presence.logoutAt)} </span>
         </div>
         ${this.renderCurrentlyPlayingGame(entity)}
       </div>
@@ -157,14 +163,14 @@ class HaNintendoSwitchCard extends LitElement {
     return format(new Date(lastOnline));
   }
 
-  renderUserAvatar(entity: NintendoSwitchUserType): TemplateResult {
-    return entity.imageUri
-      ? html` <img src="${entity.imageUri}" class="kb-steam-avatar" /> `
-      : html` <ha-icon icon="${entity.imageUri}" class="kb-steam-avatar"></ha-icon> `;
+  renderUserAvatar(entity: HAEntityType): TemplateResult {
+    return entity.attributes.imageUri
+      ? html` <img src="${entity.attributes.imageUri}" class="kb-steam-avatar" /> `
+      : html` <ha-icon icon="${entity.attributes.imageUri}" class="kb-steam-avatar"></ha-icon> `;
   }
 
-  renderCurrentlyPlayingGame(entity: NintendoSwitchUserType): TemplateResult {
-    const currentlyPlayingGame = entity.presence.game;
+  renderCurrentlyPlayingGame(entity: HAEntityType): TemplateResult {
+    const currentlyPlayingGame = entity.attributes.presence.game;
 
     return currentlyPlayingGame
       ? html`
