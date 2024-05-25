@@ -14,60 +14,33 @@ export interface BoilerplateCardConfig extends LovelaceCardConfig {
 }
 
 export interface HAEntityType {
-  attributes: NintendoSwitchUserType;
+  attributes: Friend;
 }
 
-export interface NintendoSwitchUserType {
+export interface Friend {
   id: number;
   nsaId: string;
   imageUri: string;
   name: string;
-  supportId: string;
-  isChildRestricted: boolean;
-  etag: string;
-  links: Links;
-  permissions: Permissions;
+  isFriend: boolean;
+  isFavoriteFriend: boolean;
+  isServiceUser: boolean;
+  friendCreatedAt: number;
   presence: Presence;
-}
-
-export interface Links {
-  nintendoAccount: NintendoAccount;
-  friendCode: FriendCode;
-}
-
-export interface NintendoAccount {
-  membership: Membership;
-}
-
-export interface Membership {
-  active: Active;
-}
-
-export interface Active {
-  active: boolean;
-}
-
-export interface FriendCode {
-  regenerable: boolean;
-  regenerableAt: number;
-  id: string;
-}
-
-export interface Permissions {
-  presence: string;
 }
 
 export interface Presence {
   state: string;
   updatedAt: number;
   logoutAt: number;
-  game: Game | null;
+  game: Game;
 }
 
 export interface Game {
   name: string;
   imageUri: string;
   shopUri: string;
-  totalPlayTime: string;
-  firstPlayedAt: string;
+  totalPlayTime: number;
+  firstPlayedAt: number;
+  sysDescription: string;
 }

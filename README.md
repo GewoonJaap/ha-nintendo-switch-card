@@ -40,29 +40,29 @@ You need at least one Nintendo Switch integration to use with this card.
 
 #### Setting up the Nintendo Switch integration
 - Host the NX-API http server https://community.home-assistant.io/t/new-integration-nintendo-switch/564797/3
+- Login to the NX-API with an account that is friends with the account you want to track. (https://github.com/samuelthomas2774/nxapi/issues/1)
+  Getting the NSA ID: https://github.com/samuelthomas2774/nxapi/blob/main/docs/cli.md#friends
 - Add the following to your configuration.yaml:
 ```yaml
   - platform: rest
     unique_id: nintendo_switch_activity
     name: "Nintendo Switch Activity"
-    resource: http://NXAPI-ENDPOINT/api/znc/user
+    resource: http://NXAPI-ENDPOINT/api/znc/friend/NSA ID
     headers:
       Authorization: na <SESSION TOKEN, STARTS WITH ey>
     scan_interval: 30
-    json_attributes_path: $.user
+    json_attributes_path: $.friend
     json_attributes:
       - id
       - nsaId
       - imageUri
       - name
-      - supportId
-      - isChildRestricted
-      - etag
-      - links
-      - friendCode
-      - permissions
+      - isFriend
+      - isFavoriteFriend
+      - isServiceUser
+      - friendCreatedAt
       - presence
-    value_template: "{{ value_json.presence.state }}"
+    value_template: "{{ value_json.friend.presence.state }}"
 ```
 
 ### HACS (recommended)

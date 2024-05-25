@@ -137,7 +137,6 @@ class HaNintendoSwitchCard extends LitElement {
       <div class="kb-container kb-clickable" @click=${() => this.handlePopup(entity)}>
         <div class="ha-nintendo-switch-username">
           ${this.config.friendly_name ? this.config.friendly_name : entity.attributes.name}
-          (SW-${entity.attributes.links.friendCode.id})
         </div>
         ${this.renderUserAvatar(entity)}
         <div class="ha-nintendo-switch-online-status">${entity.attributes.presence.state}</div>
