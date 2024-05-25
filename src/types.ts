@@ -45,7 +45,6 @@ export interface Game {
 }
 
 export enum PresenceState {
-  /** Offline */
   OFFLINE = 'OFFLINE',
   /** A console linked to this account is online, but the user isn't selected in an application */
   INACTIVE = 'INACTIVE',

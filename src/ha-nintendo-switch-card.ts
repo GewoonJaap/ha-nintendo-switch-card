@@ -178,9 +178,6 @@ class HaNintendoSwitchCard extends LitElement {
 
   static get styles(): CSSResult {
     return css`
-      /* :host {
-      } */
-
       .card-header {
         width: 100%;
         padding-top: 8px;

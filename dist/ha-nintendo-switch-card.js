@@ -199,9 +199,6 @@ const Y=window.ShadowRoot&&(void 0===window.ShadyCSS||window.ShadyCSS.nativeShad
             <img class="game-img" src="${e.imageUri}" />
           </div>
         `:M``}static get styles(){return Q`
-      /* :host {
-      } */
-
       .card-header {
         width: 100%;
         padding-top: 8px;
