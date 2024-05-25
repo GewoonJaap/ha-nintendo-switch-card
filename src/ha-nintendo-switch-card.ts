@@ -153,7 +153,33 @@ class HaNintendoSwitchCard extends LitElement {
   }
 
   formatLastOnline(lastOnline: number): string {
-    return format(new Date(lastOnline));
+    // Convert to milliseconds
+    return format(new Date(lastOnline * 1000));
+  }
+
+  formatPlaytime(playtimeMinutes: number): string {
+    const seconds = playtimeMinutes * 60;
+    const d = Math.floor(seconds / (3600 * 24));
+    const h = Math.floor((seconds % (3600 * 24)) / 3600);
+    const m = Math.floor((seconds % 3600) / 60);
+    const s = Math.floor(seconds % 60);
+
+    const dDisplay = d > 0 ? d + (d == 1 ? ' day, ' : ' days, ') : '';
+    const hDisplay = h > 0 ? h + (h == 1 ? ' hour, ' : ' hours, ') : '';
+    const mDisplay = m > 0 ? m + (m == 1 ? ' minute, ' : ' minutes, ') : '';
+    const sDisplay = s > 0 ? s + (s == 1 ? ' second' : ' seconds') : '';
+    let finalText = dDisplay + hDisplay + mDisplay + sDisplay;
+
+    // finaltext remove last comma if text ends with comma
+    finalText = finalText.replace(/,\s*$/, '');
+
+    // if finaltext is empty, return 0 minutes
+    // capatilize every first letter after space
+    finalText = finalText.replace(/\w\S*/g, function (txt) {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
+
+    return finalText || '0 minutes';
   }
 
   renderUserAvatar(entity: HAEntityType): TemplateResult {
@@ -170,6 +196,13 @@ class HaNintendoSwitchCard extends LitElement {
           <div class="ha-nintendo-switch-now-playing">
             <div class="label">Now Playing</div>
             <div class="game-title">${currentlyPlayingGame.name}</div>
+            <div class="ha-nintendo-switch-last-online">
+              <span>
+                <ha-icon icon="mdi:clock-outline"></ha-icon>
+                Played for
+              </span>
+              <span> ${this.formatPlaytime(entity.attributes.presence.game.totalPlayTime)} </span>
+            </div>
             <img class="game-img" src="${currentlyPlayingGame.imageUri}" />
           </div>
         `
