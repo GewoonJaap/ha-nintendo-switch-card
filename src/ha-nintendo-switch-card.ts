@@ -26,7 +26,7 @@ window.customCards.push({
 });
 
 import { format } from 'timeago.js';
-import { HAEntityType } from './types';
+import { HAEntityType, PresenceState } from './types';
 
 @customElement('ha-nintendo-switch-card')
 class HaNintendoSwitchCard extends LitElement {
@@ -89,7 +89,7 @@ class HaNintendoSwitchCard extends LitElement {
         if (
           entityObj &&
           entityObj.attributes.presence.state &&
-          entityObj.attributes.presence.state.toLowerCase() !== 'offline'
+          entityObj.attributes.presence.state !== PresenceState.OFFLINE
         ) {
           newEntities.push(entity);
         }
@@ -143,7 +143,7 @@ class HaNintendoSwitchCard extends LitElement {
         <div class="ha-nintendo-switch-last-online">
           <span>
             <ha-icon icon="mdi:clock-outline"></ha-icon>
-            ${entity.attributes.presence.state.toLowerCase() === 'online' ? 'Online Since' : 'Last Online'}
+            ${entity.attributes.presence.state == PresenceState.ONLINE ? 'Online Since' : 'Last Online'}
           </span>
           <span> ${this.formatLastOnline(entity.attributes.presence.logoutAt)} </span>
         </div>

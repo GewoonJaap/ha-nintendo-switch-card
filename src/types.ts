@@ -30,7 +30,7 @@ export interface Friend {
 }
 
 export interface Presence {
-  state: string;
+  state: PresenceState;
   updatedAt: number;
   logoutAt: number;
   game: Game;
@@ -43,4 +43,19 @@ export interface Game {
   totalPlayTime: number;
   firstPlayedAt: number;
   sysDescription: string;
+}
+
+export enum PresenceState {
+  /** Offline */
+  OFFLINE = 'OFFLINE',
+  /** A console linked to this account is online, but the user isn't selected in an application */
+  INACTIVE = 'INACTIVE',
+  /** The user is selected in an application */
+  ONLINE = 'ONLINE',
+  /**
+   * The user is selected in an application and playing online.
+   * (Is this set by Nintendo's servers if the user is in a session on Nintendo's servers, or by the application
+   * running on the console?)
+   */
+  PLAYING = 'PLAYING',
 }
