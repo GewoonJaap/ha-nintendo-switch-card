@@ -145,7 +145,7 @@ class HaNintendoSwitchCard extends LitElement {
             <ha-icon icon="mdi:clock-outline"></ha-icon>
             ${entity.attributes.presence.state == PresenceState.ONLINE ? 'Online Since' : 'Last Online'}
           </span>
-          <span> ${this.formatLastOnline(entity.attributes.presence.logoutAt)} </span>
+          <span> ${this.formatLastOnline(entity.attributes.presence.updatedAt)} </span>
         </div>
         ${this.renderCurrentlyPlayingGame(entity)}
       </div>

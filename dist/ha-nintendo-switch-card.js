@@ -188,7 +188,7 @@ const Y=window.ShadowRoot&&(void 0===window.ShadyCSS||window.ShadyCSS.nativeShad
             <ha-icon icon="mdi:clock-outline"></ha-icon>
             ${t.attributes.presence.state==at.ONLINE?"Online Since":"Last Online"}
           </span>
-          <span> ${this.formatLastOnline(t.attributes.presence.logoutAt)} </span>
+          <span> ${this.formatLastOnline(t.attributes.presence.updatedAt)} </span>
         </div>
         ${this.renderCurrentlyPlayingGame(t)}
       </div>
