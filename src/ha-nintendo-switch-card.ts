@@ -143,13 +143,17 @@ class HaNintendoSwitchCard extends LitElement {
         <div class="ha-nintendo-switch-last-online">
           <span>
             <ha-icon icon="mdi:clock-outline"></ha-icon>
-            ${entity.attributes.presence.state == PresenceState.ONLINE ? 'Online Since' : 'Last Online'}
+            ${this.isOnline(entity.attributes.presence.state) ? 'Online Since' : 'Last Online'}
           </span>
           <span> ${this.formatLastOnline(entity.attributes.presence.updatedAt)} </span>
         </div>
         ${this.renderCurrentlyPlayingGame(entity)}
       </div>
     `;
+  }
+
+  isOnline(state: PresenceState): boolean {
+    return state === PresenceState.ONLINE || state === PresenceState.PLAYING;
   }
 
   formatLastOnline(lastOnline: number): string {
@@ -202,6 +206,13 @@ class HaNintendoSwitchCard extends LitElement {
                 Played for
               </span>
               <span> ${this.formatPlaytime(entity.attributes.presence.game.totalPlayTime)} </span>
+            </div>
+            <div class="ha-nintendo-switch-last-online">
+              <span>
+                <ha-icon icon="mdi:gamepad-square-outline"></ha-icon>
+                Description
+              </span>
+              <span> ${entity.attributes.presence.game.sysDescription} </span>
             </div>
             <img class="game-img" src="${currentlyPlayingGame.imageUri}" />
           </div>
